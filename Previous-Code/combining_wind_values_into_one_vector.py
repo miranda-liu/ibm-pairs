@@ -14,8 +14,8 @@ for i in range(8783):
     current_timestamp = time_in_correct_format[i]
 
     # read east csv and read north csv
-    east = pd.read_csv(r'C:\Users\ChemeGrad2019\Desktop\IBM_PAIRS\New_data_format\Spatially_aggregated//' + 'Global weather (ERA5)-100 meter wind towards east-' + current_timestamp + '.csv')
-    north = pd.read_csv(r'C:\Users\ChemeGrad2019\Desktop\IBM_PAIRS\New_data_format\Spatially_aggregated//' + 'Global weather (ERA5)-100 meter wind towards north-' + current_timestamp + '.csv')
+    east = pd.read_csv('/Users/mirandaliu/documents/github/ibm-pairs/Previous-Code' + 'Global weather (ERA5)-100 meter wind towards east-' + current_timestamp + '.csv')
+    north = pd.read_csv('/Users/mirandaliu/documents/github/ibm-pairs/Previous-Code' + 'Global weather (ERA5)-100 meter wind towards north-' + current_timestamp + '.csv')
 
     #drop all columns expect mean
     east = east.drop(columns=['count()[unit: km^2]', 'min()', 'max()', '2nd moment'])

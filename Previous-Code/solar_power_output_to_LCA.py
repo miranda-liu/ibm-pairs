@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import matplotlib
 import statistics
 
-solar_data = pd.read_csv(r'C:\Users\ChemeGrad2019\Desktop\IBM_PAIRS\New_data_format\level_1\tracking_solar_output.csv')
+solar_data = pd.read_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/Previous-Code/tracking_solar_output.csv')
 solar_data = solar_data.set_index('PAIRS polygon ID', drop = True)
 solar_transposed = solar_data.T
 yearly_sum = solar_transposed.sum() #Wh/yr
@@ -18,7 +18,7 @@ emissions_normalized = emissions * size #gCO2
 lifetime = 30 #yr
 LCA = emissions_normalized / yearly_sum / lifetime * 1000 #gCO2/kWh
 
-LCA.to_csv(r'C:\Users\ChemeGrad2019\Desktop\IBM_PAIRS\New_data_format\level_1\solar_LCA_column.csv')
+LCA.to_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/Previous-Code/solar_LCA_column.csv')
 
 # via extrapolation
 #calculating CF
@@ -43,7 +43,7 @@ plt.title('Solar LCA (gCO2/kWh)')
 plt.show()
 
 LCA_shape_df_final = pd.DataFrame(LCA_shape_np_final)
-LCA_shape_df_final.to_csv(r'C:\Users\ChemeGrad2019\Desktop\IBM_PAIRS\New_data_format\level_1\solar_LCA.csv')
+LCA_shape_df_final.to_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/Previous-Code/solar_LCA.csv')
 
 #comparing SESAME to PAIRS results
 boston_PAIRS = float(LCA.loc[1333])
