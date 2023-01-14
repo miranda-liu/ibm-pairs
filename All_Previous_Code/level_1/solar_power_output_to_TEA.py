@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-solar_data = pd.read_csv(r'C:\Users\ChemeGrad2019\Desktop\IBM_PAIRS\New_data_format\level_1\tracking_solar_output.csv')
+solar_data = pd.read_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/All_Previous_Code/level_1/tracking_solar_output.csv')
 solar_data = solar_data.set_index('PAIRS polygon ID', drop = True)
 solar_transposed = solar_data.T
 yearly_sum = solar_transposed.sum()
@@ -95,7 +95,7 @@ LCOE_VOM = LCOE_VOM * efficiency_ref / 0.26
 
 LCOE = (LCOE_capex + LCOE_FOM + LCOE_VOM) * 1000 # $/MWh
 
-LCOE.to_csv(r'C:\Users\ChemeGrad2019\Desktop\IBM_PAIRS\New_data_format\level_1\solar_LCOE_column.csv')
+LCOE.to_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/All_Previous_Code/level_1/solar_LCOE_column.csv')
 
 LCOE_shape_df = pd.DataFrame(index = range(1, 1451), columns = ['LCOE'])
 LCOE_shape_df['LCOE'] = LCOE
@@ -110,7 +110,7 @@ plt.title('Solar LCOE ($/MWh)')
 plt.show()
 
 LCOE_shape_df_final = pd.DataFrame(LCOE_shape_np_final)
-LCOE_shape_df_final.to_csv(r'C:\Users\ChemeGrad2019\Desktop\IBM_PAIRS\New_data_format\level_1\solar_LCOE.csv')
+LCOE_shape_df_final.to_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/All_Previous_Code/level_1/solar_LCOE.csv')
 
 
 print('solar power output to TEA is done :)')

@@ -15,7 +15,7 @@ timedelta_index = pd.date_range(start=start_datetime, end=end_datetime, periods=
 time_in_correct_format = timedelta_index.strftime(DATE_TIME_FORMAT)
 #print(time_in_correct_format)
 
-testing = pd.read_csv(r'C:\Users\ChemeGrad2019\Desktop\IBM_PAIRS\New_data_format\Spatially_aggregated\Global weather (ERA5)-wind value-01_01_2020T01_00_00.csv')
+testing = pd.read_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/All_Previous_Code/Spatially_aggregated/Global weather (ERA5)-wind value-01_01_2020T01_00_00.csv')
 correct_index = testing['PAIRS polygon ID']
 
 tracking_wind_output = pd.DataFrame(index = correct_index, columns = range(8783))
@@ -25,7 +25,7 @@ for i in range(8783):
     print(i)
     current_timestamp = time_in_correct_format[i]
 
-    v = pd.read_csv(r'C:\Users\ChemeGrad2019\Desktop\IBM_PAIRS\New_data_format\Spatially_aggregated//' + 'Global weather (ERA5)-wind value-' + current_timestamp + '.csv') #m/s
+    v = pd.read_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/All_Previous_Code/Spatially_aggregated//' + 'Global weather (ERA5)-wind value-' + current_timestamp + '.csv') #m/s
     v = v.set_index('PAIRS polygon ID', drop=True)
 
     #v = v * (40/10)**0.2 #this is to extrapolate wind speed for 10 to 40 meteres high using: https://websites.pmc.ucsc.edu/~jnoble/wind/extrap/
@@ -38,7 +38,7 @@ for i in range(8783):
 
     tracking_wind_output.iloc[:, i] = power
 
-tracking_wind_output.to_csv(r'C:\Users\ChemeGrad2019\Desktop\IBM_PAIRS\New_data_format\level_1\tracking_wind_output.csv')
+tracking_wind_output.to_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/All_Previous_Code/level_1/tracking_wind_output.csv')
 print('wind calculations are finished :)')
 
 

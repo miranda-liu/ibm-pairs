@@ -4,7 +4,7 @@ import numpy as np
 import scipy
 from scipy.stats import norm
 
-solar_data = pd.read_csv(r'C:\Users\ChemeGrad2019\Desktop\IBM_PAIRS\New_data_format\level_1\tracking_solar_output.csv')
+solar_data = pd.read_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/All_Previous_code/level_1/tracking_solar_output.csv')
 solar_data = solar_data.set_index('PAIRS polygon ID', drop = True)
 solar_transposed = solar_data.T
 

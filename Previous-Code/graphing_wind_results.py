@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # pwd to print absolute path
-wind_data = pd.read_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/Previous-Code/tracking_wind_output.csv')
+wind_data = pd.read_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/All_Previous_Code/tracking_wind_output.csv')
 wind_data = wind_data.set_index('PAIRS polygon ID', drop = True)
 wind_transposed = wind_data.T
 
