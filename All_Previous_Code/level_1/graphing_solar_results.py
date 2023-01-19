@@ -18,8 +18,11 @@ plt.show()
 
 
 # plot cities for two weeks.
-start_time = 3000
-end_time = 3168
+# start_time = 3000
+# end_time = 3168
+
+start_time = 0
+end_time = 47
 
 x = range(start_time, end_time)
 
@@ -56,7 +59,7 @@ correct_shape_np_final_GWh = correct_shape_np_final/ 1000000000
 plt.imshow(correct_shape_np_final_GWh, cmap='plasma') #plasma is good for solar
 plt.colorbar()
 plt.title('Solar yearly sum output level 1 (GWh)')
-plt.clim(65, 100)
+# plt.clim(65, 100)
 plt.show()
 
 correct_shape_np_final_GWh_df = pd.DataFrame(correct_shape_np_final_GWh)
@@ -71,7 +74,7 @@ plt.ylim(ymin=0, ymax = 0.15)
 plt.xlim(xmin=65, xmax = 100)
 plt.title('Solar yearly sum output distribution level 1')#, fontweight="bold")
 
-
+# normal deviation plot
 intermediate = yearly_sum/1000000000
 (mu, sigma) = norm.fit(intermediate)
 y = norm.pdf(bins, mu, sigma) * sum(n * np.diff(bins))

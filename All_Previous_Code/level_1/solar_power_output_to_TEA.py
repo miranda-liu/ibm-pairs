@@ -105,7 +105,7 @@ LCOE_shape_np_final = np.reshape(LCOE_shape_np, (25, 58), order = 'F')
 #make a heatmap out of
 plt.imshow(LCOE_shape_np_final, cmap='RdPu') #plasma is good for solar
 plt.colorbar()
-#plt.clim(35, 62)
+# plt.clim(35, 62)
 plt.title('Solar LCOE ($/MWh)')
 plt.show()
 

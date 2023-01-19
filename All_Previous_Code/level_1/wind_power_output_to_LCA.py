@@ -44,7 +44,7 @@ LCA_shape_np_final = np.reshape(LCA_shape_np, (25, 58), order = 'F')
 hot_reversed = matplotlib.cm.get_cmap('hot_r')
 plt.imshow(LCA_shape_np_final, cmap=hot_reversed) #plasma is good for solar
 plt.colorbar()
-#plt.clim(1.3, 2)
+# plt.clim(1.3, 2)
 plt.title('Wind LCA (gCO2/kWh)')
 plt.show()
 

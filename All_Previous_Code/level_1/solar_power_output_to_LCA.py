@@ -61,6 +61,8 @@ tuscon_SESAME = float(26)
 labels = ['Boston', 'Seattle', 'Miami', 'Tuscon']
 PAIRS = [boston_PAIRS, seattle_PAIRS, miami_PAIRS, tuscon_PAIRS]
 SESAME = [boston_SESAME, seattle_SESAME, miami_SESAME, tuscon_SESAME]
+print(PAIRS)
+print(SESAME)
 
 x = np.arange(len(labels))  # the label locations
 width = 0.3  # the width of the bars
