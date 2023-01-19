@@ -27,18 +27,18 @@ f_losses = (1 - f_electric) * (1 - f_install) * (1 - f_available) * (1 - f_ratin
 #loop through and do every timestamp
 DATE_TIME_FORMAT = '%m_%d_%Y' + 'T' '%H_%M_%S'
 start_datetime = datetime.strptime('01_01_2020T01_00_00', DATE_TIME_FORMAT)
-end_datetime = datetime.strptime('12_31_2020T23_00_00', DATE_TIME_FORMAT)
-timedelta_index = pd.date_range(start=start_datetime, end=end_datetime, periods=8783) # 24 extra hours hecause 2020 was a leap year
+end_datetime = datetime.strptime('01_02_2020T23_00_00', DATE_TIME_FORMAT)
+timedelta_index = pd.date_range(start=start_datetime, end=end_datetime, periods=47) # 24 extra hours hecause 2020 was a leap year
 time_in_correct_format = timedelta_index.strftime(DATE_TIME_FORMAT)
 #print(time_in_correct_format)
 
-testing = pd.read_csv(r'C:\Users\ChemeGrad2019\Desktop\IBM_PAIRS\New_data_format\Spatially_aggregated\Global weather (ERA5)-wind value-01_01_2020T01_00_00.csv')
+testing = pd.read_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/Data/Spatially_aggregated/Global weather (ERA5)-wind value-01_01_2020T01_00_00.csv')
 correct_index = testing['PAIRS polygon ID']
 
-tracking_solar_output = pd.DataFrame(index = correct_index, columns = range(8783))
+tracking_solar_output = pd.DataFrame(index = correct_index, columns = range(47))
 
 #finding_latitudes based on IDs
-ID_to_latitude = pd.read_csv(r'C:\Users\ChemeGrad2019\Desktop\IBM_PAIRS\New_data_format\shape_info\mit-grid.csv', index_col='id')
+ID_to_latitude = pd.read_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/Data/shape_info/mit-grid.csv', index_col='id')
 #columns_names = ID_to_latitude.columns
 latitudes = pd.DataFrame(index = correct_index)
 latitudes['Lat'] = ID_to_latitude.iloc[:, -2]
@@ -51,18 +51,18 @@ day = day.reset_index(drop=True)
 C_snow_df = pd.DataFrame(index=correct_index, columns=['C snow'])
 
 #for the length of the time_in_correct_format object, loop through each element
-for i in range(8783):
+for i in range(47):
     print(i)
     current_timestamp = time_in_correct_format[i]
 
     #collect all hourly data
-    v = pd.read_csv(r'C:\Users\ChemeGrad2019\Desktop\IBM_PAIRS\New_data_format\Spatially_aggregated//' + 'Global weather (ERA5)-wind value-' + current_timestamp + '.csv') #m/s
+    v = pd.read_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/Data/Spatially_aggregated/' + 'Global weather (ERA5)-wind value-' + current_timestamp + '.csv') #m/s
     v = v.set_index('PAIRS polygon ID', drop=True)
-    I_horiz = pd.read_csv(r'C:\Users\ChemeGrad2019\Desktop\IBM_PAIRS\New_data_format\Spatially_aggregated//' + 'Global weather (ERA5)-Solar radiation-' + current_timestamp + '.csv') #J/m^2
+    I_horiz = pd.read_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/Data/Spatially_aggregated/' + 'Global weather (ERA5)-Solar radiation-' + current_timestamp + '.csv') #J/m^2
     I_horiz = I_horiz.set_index('PAIRS polygon ID', drop=True)
-    temp_K = pd.read_csv(r'C:\Users\ChemeGrad2019\Desktop\IBM_PAIRS\New_data_format\Spatially_aggregated//' + 'Global weather (ERA5)-Temperature-' + current_timestamp + '.csv')  # K
+    temp_K = pd.read_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/Data/Spatially_aggregated/' + 'Global weather (ERA5)-Temperature-' + current_timestamp + '.csv')  # K
     temp_K = temp_K.set_index('PAIRS polygon ID', drop=True)
-    snow_SWE = pd.read_csv(r'C:\Users\ChemeGrad2019\Desktop\IBM_PAIRS\New_data_format\Spatially_aggregated//' + 'Global weather (ERA5)-Snow depth-' + current_timestamp + '.csv')  # m water equivalent
+    snow_SWE = pd.read_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/Data/Spatially_aggregated/' + 'Global weather (ERA5)-Snow depth-' + current_timestamp + '.csv')  # m water equivalent
     snow_SWE = snow_SWE.set_index('PAIRS polygon ID', drop = True)
 
     #unit conversions
@@ -91,11 +91,11 @@ for i in range(8783):
     else:
         snow_increase = snow_height_cm - old_snow
         for j in range(931):
-            if snow_increase.iloc[j] > 1:
+            if snow_increase.iloc[j].all() > 1: # CHECK
                 print(j)
                 print('snow increase is big')
                 C_snow_df.iloc[j, 0] = 1
-            elif snow_height_cm.iloc[j] < 1:
+            elif snow_height_cm.iloc[j].all() < 1: # CHECK
                 C_snow_df.iloc[j, 0] = 0
 
     for k in range(931):
@@ -121,4 +121,4 @@ for i in range(8783):
     tracking_solar_output.iloc[:, i] = P_ac
 
 
-tracking_solar_output.to_csv(r'C:\Users\ChemeGrad2019\Desktop\IBM_PAIRS\New_data_format\level_1\tracking_solar_output.csv')
+tracking_solar_output.to_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/Data/Solar_and_Wind/tracking_solar_output.csv')

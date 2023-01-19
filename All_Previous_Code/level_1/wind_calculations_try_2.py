@@ -8,15 +8,15 @@ rated_power = 2550000 #W
 #loop through and do every timestamp
 DATE_TIME_FORMAT = '%m_%d_%Y' + 'T' '%H_%M_%S'
 start_datetime = datetime.strptime('01_01_2020T01_00_00', DATE_TIME_FORMAT)
-end_datetime = datetime.strptime('12_31_2020T23_00_00', DATE_TIME_FORMAT)
-timedelta_index = pd.date_range(start=start_datetime, end=end_datetime, periods=8783) # 24 extra hours hecause 2020 was a leap year
+end_datetime = datetime.strptime('01_02_2020T23_00_00', DATE_TIME_FORMAT)
+timedelta_index = pd.date_range(start=start_datetime, end=end_datetime, periods=47) # 24 extra hours hecause 2020 was a leap year
 time_in_correct_format = timedelta_index.strftime(DATE_TIME_FORMAT)
 #print(time_in_correct_format)
 
-testing = pd.read_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/All_Previous_Code/Spatially_aggregated/Global weather (ERA5)-wind value-01_01_2020T01_00_00.csv')
+testing = pd.read_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/Data/Spatially_aggregated/Global weather (ERA5)-wind value-01_01_2020T01_00_00.csv')
 correct_index = testing['PAIRS polygon ID']
 
-tracking_wind_output = pd.DataFrame(index = correct_index, columns = range(8783))
+tracking_wind_output = pd.DataFrame(index = correct_index, columns = range(47))
 
 cf_2 = 0
 cf_3 = 0.0052
@@ -34,11 +34,11 @@ cf_14 = 1
 
 
 #for the length of the time_in_correct_format object, loop through each element
-for i in range(8783):
+for i in range(47):
     print(i)
     current_timestamp = time_in_correct_format[i]
 
-    v = pd.read_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/All_Previous_Code/Spatially_aggregated/' + 'Global weather (ERA5)-wind value-' + current_timestamp + '.csv') #m/s
+    v = pd.read_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/Data/Spatially_aggregated/' + 'Global weather (ERA5)-wind value-' + current_timestamp + '.csv') #m/s
     v = v.set_index('PAIRS polygon ID', drop=True)
     cf = v.copy()
 
@@ -59,7 +59,7 @@ for i in range(8783):
 
     tracking_wind_output.iloc[:, i] = cf * rated_power
 
-tracking_wind_output.to_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/All_Previous_Code/level_1/tracking_wind_output.csv')
+tracking_wind_output.to_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/Data/Solar_and_Wind/tracking_wind_output.csv')
 print('wind calculations are finished :)')
 
 

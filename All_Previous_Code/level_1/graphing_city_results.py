@@ -2,9 +2,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-solar_LCOE = pd.read_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/All_Previous_Code/level_1/solar_LCOE_column.csv')
+solar_LCOE = pd.read_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/Data/Solar_and_Wind/solar_LCOE_column.csv')
 solar_LCOE = solar_LCOE.set_index('PAIRS polygon ID', drop = True)
-wind_LCOE = pd.read_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/All_Previous_Code/level_1/wind_LCOE_column.csv')
+wind_LCOE = pd.read_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/Data/Solar_and_Wind/wind_LCOE_column.csv')
 wind_LCOE = wind_LCOE.set_index('PAIRS polygon ID', drop = True)
 
 solar_LCOE_series = solar_LCOE.squeeze()

@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-wind_data = pd.read_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/All_Previous_Code/level_1/tracking_wind_output.csv')
+wind_data = pd.read_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/Data/Solar_and_Wind/tracking_wind_output.csv')
 wind_data = wind_data.set_index('PAIRS polygon ID', drop = True)
 wind_transposed = wind_data.T
 yearly_sum = wind_transposed.sum()
@@ -95,8 +95,8 @@ plt.title('Wind LCOE ($/MWh)')
 plt.show()
 
 LCOE_shape_df_final = pd.DataFrame(LCOE_shape_np_final)
-total.to_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/All_Previous_Code/level_1/wind_LCOE_column.csv')
-LCOE_shape_df_final.to_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/All_Previous_Code/level_1/wind_LCOE.csv')
+total.to_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/Data/Solar_and_Wind/wind_LCOE_column.csv')
+LCOE_shape_df_final.to_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/Data/Solar_and_Wind/wind_LCOE.csv')
 
 
 print('wind power output to TEA is done :)')

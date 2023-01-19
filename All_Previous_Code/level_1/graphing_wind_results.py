@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-wind_data = pd.read_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/All_Previous_Code/level_1/tracking_wind_output.csv')
+wind_data = pd.read_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/Data/Solar_and_Wind/tracking_wind_output.csv')
 wind_data = wind_data.set_index('PAIRS polygon ID', drop = True)
 wind_transposed = wind_data.T
 

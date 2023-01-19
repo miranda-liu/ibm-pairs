@@ -4,7 +4,7 @@ import numpy as np
 import scipy
 from scipy.stats import norm
 
-solar_data = pd.read_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/All_Previous_code/level_1/tracking_solar_output.csv')
+solar_data = pd.read_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/Data/Solar_and_Wind/tracking_solar_output.csv')
 solar_data = solar_data.set_index('PAIRS polygon ID', drop = True)
 solar_transposed = solar_data.T
 
@@ -12,7 +12,7 @@ solar_transposed = solar_data.T
 ax = solar_transposed.plot(legend=False)
 ax.set_xlabel('Time into year (h)', fontsize=12)
 ax.set_ylabel('Solar power output (W)', fontsize=12)
-ax.set_xlim([0, 8783])
+ax.set_xlim([0, 47]) # [0, 8783]
 ax.set_ylim(0)
 plt.show()
 
