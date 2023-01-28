@@ -7,7 +7,7 @@ width = int(input("Enter width of granularity matrix: "))
 
 # all_cfs represents a full year of capacity factors in hourly increments
 all_cfs = []
-hours_per_year = 8760
+hours_per_year = 10
 
 for i in range(length * width):
     temp_location = []
@@ -21,4 +21,3 @@ for i in range(length * width):
 # dict = {'Capacity Factors': all_cfs}
 df = pd.DataFrame(all_cfs) 
 df.to_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/Pipeline_B/random_capacity_factors.csv') 
-
