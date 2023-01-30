@@ -1,6 +1,7 @@
 import csv
 import pandas as pd
 import cf_generator
+import numpy as np
 
 hours = cf_generator.hours_per_year
 years = cf_generator.years
@@ -55,19 +56,38 @@ def rf_list():
 
 # representing rf data in a matrix
 def rf_3d_matrix():
-    rf_matrix_3d = []
-    
-    hour_matrix = []
+    width = cf_generator.width
+    length = cf_generator.length
 
-    for i in range(hours):
-        temp_list = [all_rfs[0][i]]
-        hour_matrix.append(temp_list)
-    
-    for i in range(hours):
-        for j in range(1, cf_generator.width*cf_generator.length):
+    # generats a 3d matrix inner arrays of dimensions width * length, and h number of inner arrays (each 2d array represents a new hour)
+    rf_3dmatrix = np.ndarray(shape=(hours,width,length), dtype=float, order='F')
 
+    temp_list = []
+    for i in range(hours):
+        for j in range(width * length):
+            temp = all_rfs[j][i]
+            temp_list.append(temp)
+    for i in range(hours):
+        for k in range(width):
+            for l in range(length):
+                rf_3dmatrix[i][k][l] = temp_list.pop(0)
+
+    # for i in rf_3dmatrix:
+    #     for j 
     
-    print(hour_matrix)
+  #  hour_matrix = []
+
+    # for i in range(hours):
+    #     temp_list = [all_rfs[0][i]]
+    #     hour_matrix.append(temp_list)
+    
+    # for i in range(hours):
+    #     for j in range(1, cf_generator.width*cf_generator.length):
+
+   # for i in range(cf_generator.width * cf_generator.length):
+        
+    
+    print(rf_3dmatrix)
 
 rf_3d_matrix()
 
@@ -83,4 +103,4 @@ rf_3d_matrix()
     
     # return rf_matrix_3d
 
-# print(rf_3d_matrix())
+print(rf_list())
