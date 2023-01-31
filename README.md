@@ -12,3 +12,8 @@ Reference papers
 2. https://reader.elsevier.com/reader/sd/pii/S1364032120304421?token=F571F500D91C3EE7C25892FA2A1AEEA3F0EFB285BE13C6BE2D72018B41CB9A16D71A925247F0D40CA1E4449D2D183647&originRegion=us-east-1&originCreation=20230111224702
 
 3. https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8547649
+
+Reference for CF calculations
+
+1. https://github.com/patrickbrown4/zephyr/blob/main/zephyr/pv.py (Photovoltaic, lines 426-584)
+2. https://github.com/patrickbrown4/zephyr/blob/main/zephyr/wind.py (Wind, lines 421-592)
