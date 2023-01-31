@@ -3,12 +3,13 @@ import pandas as pd
 import cf_generator
 import numpy as np
 
+vre_type = cf_generator.vre_type
 hours = cf_generator.hours_per_year
 years = cf_generator.years
 
 all_rfs = []
 
-with open('/Users/mirandaliu/Documents/GitHub/ibm-pairs/Pipeline_B/random_capacity_factors.csv') as file_obj:
+with open('/Users/mirandaliu/Documents/GitHub/ibm-pairs/Pipeline_B/random_' + vre_type + '_capacity_factors.csv') as file_obj:
     # skip header
     heading = next(file_obj)
 
@@ -48,7 +49,7 @@ with open('/Users/mirandaliu/Documents/GitHub/ibm-pairs/Pipeline_B/random_capaci
 # each row represents a new location
 # each column represents a new hour
 df = pd.DataFrame(all_rfs) 
-df.to_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/Pipeline_B/reliability_factors.csv') 
+df.to_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/Pipeline_B/' + vre_type + '_reliability_factors.csv') 
 
 # representing rf data in a 2d list (each inner list represents one location's rf hourly)
 def rf_list():
@@ -59,8 +60,9 @@ def rf_3d_matrix():
     width = cf_generator.width
     length = cf_generator.length
 
-    # generats a 3d matrix inner arrays of dimensions width * length, and h number of inner arrays (each 2d array represents a new hour)
+    # generates a 3d matrix inner arrays of dimensions width * length, and h number of inner arrays (each 2d array represents a new hour)
     rf_3dmatrix = np.ndarray(shape=(hours,width,length), dtype=float, order='F')
+    np.set_printoptions(suppress=True) # supresses scientific notation in np array
 
     temp_list = []
     for i in range(hours):
@@ -71,36 +73,9 @@ def rf_3d_matrix():
         for k in range(width):
             for l in range(length):
                 rf_3dmatrix[i][k][l] = temp_list.pop(0)
+          
+    return rf_3dmatrix
 
-    # for i in rf_3dmatrix:
-    #     for j 
-    
-  #  hour_matrix = []
+# print(rf_3d_matrix())
 
-    # for i in range(hours):
-    #     temp_list = [all_rfs[0][i]]
-    #     hour_matrix.append(temp_list)
-    
-    # for i in range(hours):
-    #     for j in range(1, cf_generator.width*cf_generator.length):
-
-   # for i in range(cf_generator.width * cf_generator.length):
-        
-    
-    print(rf_3dmatrix)
-
-rf_3d_matrix()
-
-    # hour_matrix = []
-
-
-    # for i in range(cf_generator.width * cf_generator.length):
-    #     loc_all_hourly_rf = []
-    #     for j in range(hours):
-    #         loc_all_hourly_rf.append(all_rfs[i][j])
-    #     hour_matrix.append(loc_all_hourly_rf)
-    # rf_matrix_3d.append(hour_matrix)
-    
-    # return rf_matrix_3d
-
-print(rf_list())
+# print(rf_list())
