@@ -49,7 +49,7 @@ with open('/Users/mirandaliu/Documents/GitHub/ibm-pairs/Pipeline_B/random_wind_c
 # each row represents a new location
 # each column represents a new hour
 df = pd.DataFrame(all_wind_rfs) 
-df.to_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/Pipeline_B/solar_reliability_factors.csv') 
+df.to_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/Pipeline_B/wind_reliability_factors.csv') 
 
 # representing rf data in a 2d list (each inner list represents one location's rf hourly)
 def rf_list():

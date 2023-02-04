@@ -110,7 +110,7 @@ def csv_combine_rfs():
     df.to_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/Pipeline_B/combined_reliability_factors.csv') 
 
 csv_combine_rfs()
-print(rf_3d_combined())
+rf_3d_combined()
 
 # wind_cfs = wind_rf_calculations.rf_3d_matrix_wind()
 # solar_cfs = solar_rf_calculations.rf_3d_matrix_solar()
