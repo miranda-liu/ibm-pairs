@@ -22,8 +22,7 @@ with open('/Users/mirandaliu/Documents/GitHub/ibm-pairs/Pipeline_B/random_solar_
         # stores RFs for each location
         rf_location_yearly = []
         for i in range(1, int(len(row)/years) + 1): # iterate through each location excluding row #
-            location_mean_hourly = 0
-            location_stdev_hourly = 0
+         
             temp_total = 0
 
             for j in range(i, len(row), hours):

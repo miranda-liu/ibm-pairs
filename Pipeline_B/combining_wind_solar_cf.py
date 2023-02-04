@@ -2,6 +2,7 @@ import solar_rf_calculations
 import wind_rf_calculations
 import wind_cf_generator
 import numpy as np
+import pandas as pd
 import csv
 
 
@@ -27,12 +28,7 @@ with open('/Users/mirandaliu/Documents/GitHub/ibm-pairs/Pipeline_B/random_wind_c
             wind_cfs[i].pop(0)
         wind_cfs = [[float(x) for x in sublist] for sublist in wind_cfs]
 
-
-print("SOLAR")
-print(solar_cfs)
-print("WIND")
-print(wind_cfs)
-
+# combine solar and wind CFs
 def combine_cfs():
     combined_cf = []
     for i in range(width * length):
@@ -43,11 +39,78 @@ def combine_cfs():
         combined_cf.append(temp)
     return combined_cf
 
-print("COMBINED")
-print(combine_cfs())
+# return combined CFs as csv file
+def csv_combine_cfs():
+    csv_list = combine_cfs()
+    df = pd.DataFrame(csv_list) 
+    df.to_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/Pipeline_B/combined_capacity_factors.csv') 
+
+csv_combine_cfs()
+
+# calc combined RFs
+def combine_rfs():
+    all_combined_rfs = []
+
+    with open('/Users/mirandaliu/Documents/GitHub/ibm-pairs/Pipeline_B/combined_capacity_factors.csv') as file_obj:
+            heading = next(file_obj)
+            combined_cf_data = csv.reader(file_obj)
+
+            for row in combined_cf_data:
+                rf_location_yearly = []
+             
+                for i in range(1, int(len(row)/years) + 1): # iterate through each location excluding row #
+                    temp_total = 0
+
+                    for j in range(i, len(row), hours):
+                        temp_total += float(row[j])
+                    # calc mean
+                    mean = temp_total/years
+                   
+
+                    # calc standard deviation
+                    temp_variance_sum = 0
+                    for j in range(i, len(row), hours):
+                        temp_variance_sum += (float(row[j]) - mean) ** 2
+                    variance = temp_variance_sum/years
+                    st_dev = variance ** 0.5
 
 
-### calc combined rf values 
+                    # calc reliability factor
+                    rf = mean - 2 * st_dev
+
+                    rf_location_yearly.append(rf)
+                all_combined_rfs.append(rf_location_yearly)
+
+    return all_combined_rfs
+
+# representing combined rf data in a matrix
+def rf_3d_combined():
+
+    # generates a 3d matrix inner arrays of dimensions width * length, and h number of inner arrays (each 2d array represents a new hour)
+    rf_3dmatrix_combined = np.ndarray(shape=(hours,width,length), dtype=float, order='F')
+    np.set_printoptions(suppress=True) # supresses scientific notation in np array
+
+    all_combined_rfs = combine_rfs()
+    temp_list = []
+    for i in range(hours):
+        for j in range(width * length):
+            temp = all_combined_rfs[j][i]
+            temp_list.append(temp)
+    for i in range(hours):
+        for k in range(width):
+            for l in range(length):
+                rf_3dmatrix_combined[i][k][l] = temp_list.pop(0)
+          
+    return rf_3dmatrix_combined
+
+# return combined RFs as csv file
+def csv_combine_rfs():
+    csv_list = combine_rfs()
+    df = pd.DataFrame(csv_list) 
+    df.to_csv('/Users/mirandaliu/Documents/GitHub/ibm-pairs/Pipeline_B/combined_reliability_factors.csv') 
+
+csv_combine_rfs()
+print(rf_3d_combined())
 
 # wind_cfs = wind_rf_calculations.rf_3d_matrix_wind()
 # solar_cfs = solar_rf_calculations.rf_3d_matrix_solar()

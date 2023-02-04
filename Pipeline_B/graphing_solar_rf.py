@@ -39,7 +39,6 @@ with open('/Users/mirandaliu/Documents/GitHub/ibm-pairs/Pipeline_B/solar_reliabi
         # calc standard deviation of RFs of one location
         st_dev = statistics.stdev(row)
         rf_stdev_hourly.append(st_dev)
-        
 
 # graphs average of reliability factors on heat map
 def graph_RF_mean_heatmap(mean_list):
