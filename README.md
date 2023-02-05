@@ -35,14 +35,18 @@ Dropbox: https://www.dropbox.com/scl/fo/ja83hkbetvplj52he0tt3/h?dl=0&rlkey=wevg2
     - Returns 3d array of reliability factors or csv file (wind_reliability_factors.csv)
 5. graphing_solar_rf.py
     - Graphs solar reliability factors (mean, standard deviation) on heat maps
-6. graphing_wind_rf.py
+6. graphing_solar_rf_line.py
+    - Graphs solar reliability factors of multiple locations as line graph
+7. graphing_wind_rf.py
     - Graphs wind reliability factors (mean, standard deviation) on heat maps
-7. combining_wind_solar_cf.py
+8. graphing_wind_rf_line.py
+    - Graphs wind reliability factors of multiple locations as line graph
+9. combining_wind_solar_cf.py
     - Combines CF profiles of solar and wind, then calculates a combined RF
     - Returns combined_capacity_factors.csv, combined_reliability_factors.csv, and 3d array of combined RFs
-8. graphing_solar_cf_line.py
+10. graphing_solar_cf_line.py
     - Graphs solar CFs over time as line graph
-9. graphing_wind_cf_line.py
+11. graphing_wind_cf_line.py
     - Graphs wind CFs over time as line graph
-10. graphing_combined_rf.py
+12. graphing_combined_rf.py
     - Graphs combined wind and solar reliability factors (mean, standard deviation) on heat maps
